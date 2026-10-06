@@ -29,11 +29,13 @@ import {
 } from "@/lib/due-date-status";
 import { getInitials } from "@/lib/get-initials";
 import { getPriorityIcon } from "@/lib/priority";
+import { getTaskKey } from "@/lib/task-key";
 import { toast } from "@/lib/toast";
 import useBulkSelectionStore from "@/store/bulk-selection";
 import useProjectStore from "@/store/project";
 import { useUserPreferencesStore } from "@/store/user-preferences";
 import type Task from "@/types/task";
+import { TaskProjectBadge } from "../task/task-project-badge";
 import TaskCardContextMenuContent from "../kanban-board/task-card-context-menu/task-card-context-menu-content";
 import { TaskLabels } from "../kanban-board/task-labels";
 import { ContextMenu, ContextMenuTrigger } from "../ui/context-menu";
@@ -190,9 +192,10 @@ function TaskRow({ task, projectSlug }: TaskRowProps) {
             )}
             {showTaskNumbers && (
               <div className="text-xs font-mono text-muted-foreground flex-shrink-0">
-                {projectSlug}-{task.number}
+                {getTaskKey(task, projectSlug)}
               </div>
             )}
+            <TaskProjectBadge task={task} className="flex-shrink-0" />
 
             <div className="flex-1 min-w-0 flex items-center gap-2">
               <div className="flex items-center gap-2 justify-between w-full">
@@ -258,7 +261,7 @@ function TaskRow({ task, projectSlug }: TaskRowProps) {
           <TaskCardContextMenuContent
             task={task}
             taskCardContext={{
-              projectId: project.id,
+              projectId: task.projectId,
               worskpaceId: workspace.id,
               workspaceSlug: workspace.slug,
             }}

@@ -1957,7 +1957,8 @@
 			"home": "Home",
 			"inbox": "Inbox",
 			"invitePeople": "Invite people",
-			"myTasks": "My tasks"
+			"myTasks": "My tasks",
+			"allProjects": "All projects"
 		},
 		"projectList": {
 			"viewProject": "Xem dự án",
@@ -2039,6 +2040,9 @@
 				"quickSelectNumber": "Chọn tùy chọn theo số",
 				"calendarView": "Chuyển sang chế độ xem lịch"
 			}
+		},
+		"allProjects": {
+			"title": "All projects"
 		}
 	},
 	"notifications": {

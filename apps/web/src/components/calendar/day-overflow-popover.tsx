@@ -5,7 +5,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { TaskProjectBadge } from "@/components/task/task-project-badge";
 import { formatDate, formatDateShort } from "@/lib/format";
+import { getTaskKey } from "@/lib/task-key";
 import type { CalendarTask } from "./calendar-task-bar";
 
 type DayOverflowPopoverProps = {
@@ -59,9 +61,12 @@ export default function DayOverflowPopover({
                 onClick={() => handleSelectTask(task.id)}
                 className="flex w-full min-w-0 flex-col items-start gap-0.5 rounded-md px-2 py-1.5 text-left transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                {projectSlug && task.number != null ? (
-                  <span className="truncate text-[10px] text-muted-foreground">
-                    {projectSlug}-{task.number}
+                {getTaskKey(task, projectSlug) || task.projectName ? (
+                  <span className="flex w-full min-w-0 items-center gap-1.5 text-[10px] text-muted-foreground">
+                    <span className="truncate">
+                      {getTaskKey(task, projectSlug)}
+                    </span>
+                    <TaskProjectBadge task={task} />
                   </span>
                 ) : null}
                 <span className="w-full truncate text-xs font-medium text-foreground">

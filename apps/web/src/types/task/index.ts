@@ -38,6 +38,10 @@ type Task = {
   assigneeName: string | null;
   assigneeImage?: string | null;
   projectId: string;
+  // Set only when tasks from several projects share one view.
+  projectName?: string;
+  projectSlug?: string;
+  projectIcon?: string | null;
   columnId?: string | null;
   subtaskCounts?: { completed: number; total: number };
   labels?: TaskLabel[];

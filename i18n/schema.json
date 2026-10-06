@@ -7939,6 +7939,9 @@
 						"myTasks": {
 							"type": "string"
 						},
+						"allProjects": {
+							"type": "string"
+						},
 						"invitePeople": {
 							"type": "string"
 						}
@@ -7952,8 +7955,19 @@
 						"home",
 						"inbox",
 						"myTasks",
+						"allProjects",
 						"invitePeople"
 					]
+				},
+				"allProjects": {
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"title": {
+							"type": "string"
+						}
+					},
+					"required": ["title"]
 				},
 				"projectList": {
 					"type": "object",
@@ -8277,6 +8291,7 @@
 			"required": [
 				"commandPalette",
 				"sidebar",
+				"allProjects",
 				"projectList",
 				"search",
 				"settingsLayout",
@@ -10618,9 +10633,12 @@
 					"properties": {
 						"addTask": {
 							"type": "string"
+						},
+						"automaticallySortedHint": {
+							"type": "string"
 						}
 					},
-					"required": ["addTask"]
+					"required": ["addTask", "automaticallySortedHint"]
 				},
 				"pr": {
 					"type": "object",

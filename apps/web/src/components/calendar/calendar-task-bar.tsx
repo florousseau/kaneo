@@ -2,12 +2,16 @@ import type { JSX } from "react";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/cn";
 import { formatDateShort } from "@/lib/format";
+import { getTaskKey } from "@/lib/task-key";
 import type { PackableTask, WeekSegment } from "./month-grid-model";
 
 export type CalendarTask = PackableTask & {
   title: string;
   number: number | null;
   status: string;
+  projectName?: string;
+  projectSlug?: string;
+  projectIcon?: string | null;
 };
 
 const STATUS_CLASSES: Record<string, string> = {
@@ -48,10 +52,8 @@ export default function CalendarTaskBar({
     continuesAfter,
   } = segment;
 
-  const taskKey =
-    projectSlug && task.number != null
-      ? `${projectSlug}-${task.number}`
-      : undefined;
+  const taskKey = getTaskKey(task, projectSlug);
+  const project = task.projectName ? ` · ${task.projectName}` : "";
 
   const range = `${formatDateShort(task.scheduleStart)} – ${formatDateShort(
     task.scheduleEnd,
@@ -67,8 +69,8 @@ export default function CalendarTaskBar({
       }}
       title={
         taskKey
-          ? `${taskKey} · ${task.title} · ${range}`
-          : `${task.title} · ${range}`
+          ? `${taskKey} · ${task.title} · ${range}${project}`
+          : `${task.title} · ${range}${project}`
       }
       aria-label={t("tasks:calendar.taskAriaLabel", {
         title: task.title,

@@ -1965,7 +1965,8 @@
 			"home": "Home",
 			"inbox": "Inbox",
 			"invitePeople": "Invite people",
-			"myTasks": "My tasks"
+			"myTasks": "My tasks",
+			"allProjects": "All projects"
 		},
 		"projectList": {
 			"viewProject": "Projeyi Görüntüle",
@@ -2047,6 +2048,9 @@
 				"quickSelectNumber": "Numarayla seçenek seç",
 				"calendarView": "Takvim görünümüne geç"
 			}
+		},
+		"allProjects": {
+			"title": "All projects"
 		}
 	},
 	"notifications": {

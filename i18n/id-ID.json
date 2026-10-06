@@ -1957,7 +1957,8 @@
 			"home": "Home",
 			"inbox": "Inbox",
 			"invitePeople": "Invite people",
-			"myTasks": "My tasks"
+			"myTasks": "My tasks",
+			"allProjects": "All projects"
 		},
 		"projectList": {
 			"viewProject": "Lihat Proyek",
@@ -2039,6 +2040,9 @@
 				"quickSelectNumber": "Pilih opsi berdasarkan nomor",
 				"calendarView": "Beralih ke tampilan kalender"
 			}
+		},
+		"allProjects": {
+			"title": "All projects"
 		}
 	},
 	"notifications": {

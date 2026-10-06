@@ -1957,7 +1957,8 @@
 			"home": "首页",
 			"inbox": "收件箱",
 			"invitePeople": "邀请成员",
-			"myTasks": "我的任务"
+			"myTasks": "我的任务",
+			"allProjects": "All projects"
 		},
 		"projectList": {
 			"viewProject": "查看项目",
@@ -2039,6 +2040,9 @@
 				"openTask": "打开所选任务",
 				"quickSelectNumber": "按数字选择选项"
 			}
+		},
+		"allProjects": {
+			"title": "All projects"
 		}
 	},
 	"notifications": {

@@ -8,6 +8,7 @@ import {
 import { memo, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TaskProgressBadges } from "@/components/task/task-progress-badges";
+import { TaskProjectBadge } from "@/components/task/task-project-badge";
 import { TaskPullRequests } from "@/components/task/task-pull-requests";
 import {
   AlertDialog,
@@ -39,6 +40,7 @@ import {
 import { getInitials } from "@/lib/get-initials";
 import { getPriorityLabel } from "@/lib/i18n/domain";
 import { getPriorityIcon } from "@/lib/priority";
+import { getTaskKey } from "@/lib/task-key";
 import { toast } from "@/lib/toast";
 import useBulkSelectionStore from "@/store/bulk-selection";
 import useProjectStore from "@/store/project";
@@ -179,9 +181,14 @@ function TaskCardContent({
               isTaskFocused && "ring-2 ring-inset ring-ring/50",
             )}
           >
-            {showTaskNumbers && (
-              <div className="mb-2 font-medium text-[11px] text-muted-foreground/90">
-                {project?.slug}-{task.number}
+            {(showTaskNumbers || task.projectName) && (
+              <div className="mb-2 flex min-w-0 items-center gap-1.5 pr-6 font-medium text-[11px] text-muted-foreground/90">
+                {showTaskNumbers && (
+                  <span className="shrink-0">
+                    {getTaskKey(task, project?.slug)}
+                  </span>
+                )}
+                <TaskProjectBadge task={task} />
               </div>
             )}
 
@@ -349,7 +356,7 @@ function TaskCardContent({
           <TaskCardContextMenuContent
             task={task}
             taskCardContext={{
-              projectId: project.id,
+              projectId: task.projectId,
               worskpaceId: workspace.id,
               workspaceSlug: workspace.slug,
             }}

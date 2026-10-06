@@ -1965,7 +1965,8 @@
 			"home": "Home",
 			"inbox": "Inbox",
 			"invitePeople": "Invite people",
-			"myTasks": "My tasks"
+			"myTasks": "My tasks",
+			"allProjects": "All projects"
 		},
 		"projectList": {
 			"viewProject": "प्रोजेक्ट देखें",
@@ -2047,6 +2048,9 @@
 				"quickSelectNumber": "संख्या द्वारा विकल्प चुनें",
 				"calendarView": "कैलेंडर दृश्य पर जाएँ"
 			}
+		},
+		"allProjects": {
+			"title": "All projects"
 		}
 	},
 	"notifications": {
