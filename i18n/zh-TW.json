@@ -1957,7 +1957,8 @@
 			"home": "首頁",
 			"inbox": "收件匣",
 			"myTasks": "我的任務",
-			"invitePeople": "邀請成員"
+			"invitePeople": "邀請成員",
+			"allProjects": "All projects"
 		},
 		"projectList": {
 			"viewProject": "檢視專案",
@@ -2039,6 +2040,9 @@
 				"openTask": "開啟選取的任務",
 				"quickSelectNumber": "依數字選取選項"
 			}
+		},
+		"allProjects": {
+			"title": "All projects"
 		}
 	},
 	"notifications": {

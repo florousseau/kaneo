@@ -93,6 +93,7 @@ import { getInitials } from "@/lib/get-initials";
 import { resolveLabelColor } from "@/lib/label-color";
 import { getPriorityIcon } from "@/lib/priority";
 import { toast } from "@/lib/toast";
+import { ALL_PROJECTS_ID } from "@/lib/all-projects/merge-project-boards";
 import useProjectStore from "@/store/project";
 import type Task from "@/types/task";
 import { getInitialTaskColumn } from "./initial-task-column";
@@ -264,7 +265,9 @@ function CreateTaskModalContent({
 
   const routeProjectId =
     location.pathname.match(/\/project\/([^/]+)/)?.[1] ?? null;
-  const explicitProjectId = projectId || routeProjectId || "";
+  // The all-projects view has no single target, so the picker stays open.
+  const explicitProjectId =
+    (projectId !== ALL_PROJECTS_ID && projectId) || routeProjectId || "";
   const [selectedProjectId, setSelectedProjectId] = useState("");
   const { data: workspaceProjects } = useGetProjects({
     workspaceId: workspace?.id || "",

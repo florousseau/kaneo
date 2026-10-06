@@ -1973,7 +1973,11 @@
 			"home": "Home",
 			"inbox": "Inbox",
 			"invitePeople": "Invite people",
-			"myTasks": "My tasks"
+			"myTasks": "My tasks",
+			"allProjects": "Tous les projets"
+		},
+		"allProjects": {
+			"title": "Tous les projets"
 		},
 		"projectList": {
 			"viewProject": "Voir le projet",

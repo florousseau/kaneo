@@ -2,6 +2,7 @@ import { addWeeks, endOfWeek, isWithinInterval, startOfWeek } from "date-fns";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useUserPreferencesStore } from "@/store/user-preferences";
 import type { ProjectWithTasks } from "@/types/project";
+import { getTaskKey } from "@/lib/task-key";
 import type Task from "@/types/task";
 import useGetCachedCustomFieldValues from "./queries/custom-field/use-get-all-custom-field-values-by-project";
 import { type BoardFilters, DUE_DATE_FILTER_VALUES } from "./use-task-filters";
@@ -107,10 +108,7 @@ export function useTaskFiltersWithLabelsSupport(
           const title = task.title?.toLowerCase() ?? "";
           const description = task.description?.toLowerCase() ?? "";
           const taskNumber = task.number?.toString() ?? "";
-          const taskIdentifier =
-            taskNumber && project?.slug
-              ? `${project.slug}-${taskNumber}`.toLowerCase()
-              : "";
+          const taskIdentifier = getTaskKey(task, project?.slug).toLowerCase();
           const taskShortIdentifier = taskNumber ? `#${taskNumber}` : "";
           const matchesText =
             descriptionMatches?.has(task.id) ||

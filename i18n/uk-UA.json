@@ -1981,7 +1981,8 @@
 			"home": "Home",
 			"inbox": "Inbox",
 			"invitePeople": "Invite people",
-			"myTasks": "My tasks"
+			"myTasks": "My tasks",
+			"allProjects": "All projects"
 		},
 		"projectList": {
 			"viewProject": "Переглянути проєкт",
@@ -2063,6 +2064,9 @@
 				"quickSelectNumber": "Обрати варіант за номером",
 				"calendarView": "Перемкнути на вигляд календаря"
 			}
+		},
+		"allProjects": {
+			"title": "All projects"
 		}
 	},
 	"notifications": {

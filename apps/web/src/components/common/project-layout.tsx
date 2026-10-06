@@ -1,18 +1,11 @@
 import { useLocation, useNavigate } from "@tanstack/react-router";
-import {
-  CalendarDays,
-  CalendarRange,
-  SquareKanban,
-  SquircleDashed,
-} from "lucide-react";
 import { type ReactNode, useState } from "react";
-import { useTranslation } from "react-i18next";
 import MobileProjectNav from "@/components/common/header/mobile-project-nav";
 import ProjectCrumbSelect from "@/components/common/header/project-crumb-select";
+import ViewSwitcher from "@/components/common/header/view-switcher";
 import WorkspaceCrumbSelect from "@/components/common/header/workspace-crumb-select";
 import Layout from "@/components/common/layout";
 import CreateProjectModal from "@/components/shared/modals/create-project-modal";
-import { Button } from "@/components/ui/button";
 import { KbdSequence } from "@/components/ui/kbd";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import {
@@ -44,7 +37,6 @@ export default function ProjectLayout({
   showViewSwitcher = true,
   activeView,
 }: ProjectLayoutProps) {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { data: project } = useGetProject({ id: projectId, workspaceId });
@@ -90,6 +82,13 @@ export default function ProjectLayout({
       to: "/dashboard/workspace/$workspaceId/project/$projectId/gantt",
       params: { workspaceId, projectId },
     });
+  };
+
+  const viewHandlers = {
+    backlog: handleNavigateToBacklog,
+    board: handleNavigateToBoard,
+    calendar: handleNavigateToCalendar,
+    gantt: handleNavigateToGantt,
   };
 
   const handleProjectSwitch = (nextProjectId: string) => {
@@ -166,56 +165,11 @@ export default function ProjectLayout({
             </div>
 
             {showViewSwitcher && (
-              <div className="hidden h-8 items-center gap-0.5 rounded-lg border border-border/80 bg-background p-0.5 sm:inline-flex">
-                <Button
-                  variant={resolvedView === "backlog" ? "secondary" : "ghost"}
-                  size="xs"
-                  onClick={handleNavigateToBacklog}
-                  className={cn(
-                    "h-6 gap-1.5 rounded-md px-2 text-xs",
-                    resolvedView !== "backlog" && "text-muted-foreground",
-                  )}
-                >
-                  <SquircleDashed className="size-3.5" />
-                  Backlog
-                </Button>
-                <Button
-                  variant={resolvedView === "board" ? "secondary" : "ghost"}
-                  size="xs"
-                  onClick={handleNavigateToBoard}
-                  className={cn(
-                    "h-6 gap-1.5 rounded-md px-2 text-xs",
-                    resolvedView !== "board" && "text-muted-foreground",
-                  )}
-                >
-                  <SquareKanban className="size-3.5" />
-                  {t("tasks:title")}
-                </Button>
-                <Button
-                  variant={resolvedView === "calendar" ? "secondary" : "ghost"}
-                  size="xs"
-                  onClick={handleNavigateToCalendar}
-                  className={cn(
-                    "h-6 gap-1.5 rounded-md px-2 text-xs",
-                    resolvedView !== "calendar" && "text-muted-foreground",
-                  )}
-                >
-                  <CalendarRange className="size-3.5" />
-                  {t("tasks:calendar.title")}
-                </Button>
-                <Button
-                  variant={resolvedView === "gantt" ? "secondary" : "ghost"}
-                  size="xs"
-                  onClick={handleNavigateToGantt}
-                  className={cn(
-                    "h-6 gap-1.5 rounded-md px-2 text-xs",
-                    resolvedView !== "gantt" && "text-muted-foreground",
-                  )}
-                >
-                  <CalendarDays className="size-3.5" />
-                  Gantt
-                </Button>
-              </div>
+              <ViewSwitcher
+                activeView={resolvedView}
+                onSelectView={(view) => viewHandlers[view]()}
+                className="hidden sm:inline-flex"
+              />
             )}
           </div>
 

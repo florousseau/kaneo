@@ -57,7 +57,7 @@ export default function TaskCardContextMenuContent({
   const queryClient = useQueryClient();
   const { data: columnsData = [] } = useGetColumns(taskCardContext.projectId);
   const columns =
-    project?.columns && project.columns.length > 0
+    project?.id === taskCardContext.projectId && project.columns.length > 0
       ? project.columns.map((col) => ({
           slug: col.id,
           name: col.name,

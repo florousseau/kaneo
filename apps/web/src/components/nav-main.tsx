@@ -3,6 +3,7 @@ import {
   CircleCheck,
   House,
   Inbox,
+  Layers,
   type LucideIcon,
   Mail,
   Users,
@@ -29,6 +30,8 @@ type NavItem = {
   url: string;
   count?: number;
   emphasizeCount?: boolean;
+  /** Stays active on the item's sub-pages. */
+  matchPrefix?: boolean;
 };
 
 export function NavMain() {
@@ -79,6 +82,12 @@ export function NavMain() {
       count: assignedTasks?.total,
     },
     {
+      title: t("navigation:sidebar.allProjects"),
+      icon: Layers,
+      url: `${homeUrl}/all-projects`,
+      matchPrefix: true,
+    },
+    {
       title: t("navigation:sidebar.members"),
       icon: Users,
       url: `${homeUrl}/members`,
@@ -104,7 +113,11 @@ export function NavMain() {
             <SidebarMenuItem key={item.url}>
               <SidebarMenuButton
                 tooltip={item.title}
-                isActive={pathname === item.url}
+                isActive={
+                  pathname === item.url ||
+                  (item.matchPrefix === true &&
+                    pathname.startsWith(`${item.url}/`))
+                }
                 size="default"
                 className="h-8 text-sm"
                 onClick={() => navigate({ to: item.url })}

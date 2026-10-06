@@ -1973,7 +1973,8 @@
 			"home": "Home",
 			"inbox": "Inbox",
 			"invitePeople": "Invite people",
-			"myTasks": "My tasks"
+			"myTasks": "My tasks",
+			"allProjects": "All projects"
 		},
 		"projectList": {
 			"viewProject": "Vedi Progetto",
@@ -2055,6 +2056,9 @@
 				"quickSelectNumber": "Seleziona opzione per numero",
 				"calendarView": "Passa alla vista calendario"
 			}
+		},
+		"allProjects": {
+			"title": "All projects"
 		}
 	},
 	"notifications": {

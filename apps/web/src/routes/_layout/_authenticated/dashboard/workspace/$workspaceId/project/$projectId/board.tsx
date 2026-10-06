@@ -1,7 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Search } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import BoardHeaderSearch from "@/components/board/board-header-search";
+import BoardSkeleton from "@/components/board/board-skeleton";
 import BoardToolbar from "@/components/board/board-toolbar";
 import ProjectLayout from "@/components/common/project-layout";
 import KanbanBoard from "@/components/kanban-board";
@@ -10,7 +11,6 @@ import PageTitle from "@/components/page-title";
 import type { CustomFieldDefinition } from "@/components/project/custom-field-editor";
 import CreateTaskModal from "@/components/shared/modals/create-task-modal";
 import TaskDetailsSheet from "@/components/task/task-details-sheet";
-import { Input } from "@/components/ui/input";
 import { shortcuts } from "@/constants/shortcuts";
 import useGetCustomFieldFilterValues from "@/hooks/queries/custom-field/use-get-custom-field-filter-values";
 import useGetCustomFieldsByProject from "@/hooks/queries/custom-field/use-get-custom-fields-by-project";
@@ -40,46 +40,6 @@ export const Route = createFileRoute(
   }),
 });
 
-const skeletonColumns = [
-  { key: "col-todo", cards: 3 },
-  { key: "col-progress", cards: 4 },
-  { key: "col-review", cards: 2 },
-  { key: "col-done", cards: 1 },
-];
-
-function BoardSkeleton() {
-  return (
-    <div className="flex h-full w-full gap-4 p-4 overflow-hidden">
-      {skeletonColumns.map((col) => (
-        <div key={col.key} className="flex w-72 shrink-0 flex-col gap-3">
-          <div className="flex items-center gap-2 px-1">
-            <div className="h-3 w-3 rounded-full bg-muted animate-pulse" />
-            <div className="h-4 w-24 rounded bg-muted animate-pulse" />
-            <div className="h-4 w-5 rounded bg-muted animate-pulse" />
-          </div>
-          <div className="flex flex-col gap-2.5">
-            {Array.from({ length: col.cards }, (_, i) => `${col.key}-${i}`).map(
-              (cardKey) => (
-                <div
-                  key={cardKey}
-                  className="rounded-lg border border-border bg-card p-3 space-y-2.5"
-                >
-                  <div className="h-3.5 w-4/5 rounded bg-muted animate-pulse" />
-                  <div className="h-3 w-3/5 rounded bg-muted animate-pulse" />
-                  <div className="flex items-center gap-2 pt-1">
-                    <div className="h-5 w-5 rounded-full bg-muted animate-pulse" />
-                    <div className="h-3 w-16 rounded bg-muted animate-pulse" />
-                  </div>
-                </div>
-              ),
-            )}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function RouteComponent() {
   const { t } = useTranslation();
   const { projectId, workspaceId } = Route.useParams();
@@ -95,10 +55,6 @@ function RouteComponent() {
   const { viewMode, setViewMode } = useUserPreferencesStore();
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [boardSearchQuery, setBoardSearchQuery] = useState("");
-  const [isBoardSearchMounted, setIsBoardSearchMounted] = useState(false);
-  const [isBoardSearchVisible, setIsBoardSearchVisible] = useState(false);
-  const [boardSearchInput, setBoardSearchInput] =
-    useState<HTMLInputElement | null>(null);
   const { sort, setSort } = useBoardSort(projectId);
   const { background } = useBackgroundStore();
 
@@ -165,36 +121,6 @@ function RouteComponent() {
     }
   }, [data, setProject]);
 
-  const openBoardSearch = useCallback(() => {
-    setIsBoardSearchMounted(true);
-    window.requestAnimationFrame(() => setIsBoardSearchVisible(true));
-  }, []);
-
-  const closeBoardSearch = useCallback(() => {
-    setIsBoardSearchVisible(false);
-    window.setTimeout(() => setIsBoardSearchMounted(false), 180);
-  }, []);
-
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      const isFindShortcut =
-        (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "f";
-
-      if (!isFindShortcut) return;
-
-      event.preventDefault();
-      openBoardSearch();
-    };
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [openBoardSearch]);
-
-  useEffect(() => {
-    if (!isBoardSearchMounted) return;
-    window.requestAnimationFrame(() => boardSearchInput?.focus());
-  }, [isBoardSearchMounted, boardSearchInput]);
-
   const descriptionSearch = useDescriptionMatches(
     projectId,
     project,
@@ -227,35 +153,12 @@ function RouteComponent() {
     };
   }, [filteredProject, sort]);
 
-  const boardHeaderSearch = isBoardSearchMounted ? (
-    <div
-      className={`relative w-[240px] origin-top transition-[translate,scale,opacity] duration-180 ease-out ${
-        isBoardSearchVisible
-          ? "translate-y-0 scale-y-100 opacity-100"
-          : "pointer-events-none -translate-y-1 scale-y-95 opacity-0"
-      }`}
-    >
-      <Search className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 text-muted-foreground" />
-      <Input
-        ref={setBoardSearchInput}
-        value={boardSearchQuery}
-        maxLength={256}
-        onChange={(event) => setBoardSearchQuery(event.target.value)}
-        onKeyDown={(event) => {
-          if (event.key === "Escape" && !boardSearchQuery.trim()) {
-            closeBoardSearch();
-          }
-        }}
-        onBlur={() => {
-          if (!boardSearchQuery.trim()) {
-            closeBoardSearch();
-          }
-        }}
-        placeholder={t("tasks:boardSearchPlaceholder")}
-        className="h-7.5 [&_[data-slot=input]]:h-7 [&_[data-slot=input]]:leading-7 [&_[data-slot=input]]:pl-8 [&_[data-slot=input]]:text-xs [&_[data-slot=input]]:placeholder:text-xs [&_[data-slot=input]]:placeholder:leading-7"
-      />
-    </div>
-  ) : null;
+  const boardHeaderSearch = (
+    <BoardHeaderSearch
+      value={boardSearchQuery}
+      onChange={setBoardSearchQuery}
+    />
+  );
 
   return (
     <ProjectLayout

@@ -23,6 +23,7 @@ import { useUpdateTask } from "@/hooks/mutations/task/use-update-task";
 import { useRegisterShortcuts } from "@/hooks/use-keyboard-shortcuts";
 import { cn } from "@/lib/cn";
 import useBacklogBulkSelectionStore from "@/store/backlog-bulk-selection";
+import { findTaskProjectId } from "@/lib/all-projects/merge-project-boards";
 import useProjectStore from "@/store/project";
 import type { ProjectWithTasks } from "@/types/project";
 import BacklogBulkToolbar from "../bulk-selection/backlog-bulk-toolbar";
@@ -106,7 +107,8 @@ function BacklogListView({
               to: "/dashboard/workspace/$workspaceId/project/$projectId/task/$taskId",
               params: {
                 workspaceId: project.workspaceId,
-                projectId: project.id,
+                projectId:
+                  findTaskProjectId(project, focusedTaskId) ?? project.id,
                 taskId: focusedTaskId,
               },
             });

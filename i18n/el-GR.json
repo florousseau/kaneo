@@ -1965,7 +1965,8 @@
 			"home": "Home",
 			"inbox": "Inbox",
 			"invitePeople": "Invite people",
-			"myTasks": "My tasks"
+			"myTasks": "My tasks",
+			"allProjects": "All projects"
 		},
 		"projectList": {
 			"viewProject": "Προβολή έργου",
@@ -2047,6 +2048,9 @@
 				"quickSelectNumber": "Επιλογή επιλογής με αριθμό",
 				"calendarView": "Μετάβαση σε προβολή ημερολογίου"
 			}
+		},
+		"allProjects": {
+			"title": "All projects"
 		}
 	},
 	"notifications": {

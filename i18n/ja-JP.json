@@ -1957,7 +1957,8 @@
 			"home": "Home",
 			"inbox": "Inbox",
 			"invitePeople": "Invite people",
-			"myTasks": "My tasks"
+			"myTasks": "My tasks",
+			"allProjects": "All projects"
 		},
 		"projectList": {
 			"viewProject": "プロジェクトを表示",
@@ -2039,6 +2040,9 @@
 				"openTask": "選択したタスクを開く",
 				"quickSelectNumber": "番号で項目を選択"
 			}
+		},
+		"allProjects": {
+			"title": "All projects"
 		}
 	},
 	"notifications": {

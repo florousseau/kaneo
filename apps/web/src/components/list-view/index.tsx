@@ -31,6 +31,7 @@ import { cn } from "@/lib/cn";
 import { getColumnIcon } from "@/lib/column";
 import { toast } from "@/lib/toast";
 import useBulkSelectionStore from "@/store/bulk-selection";
+import { findTaskProjectId } from "@/lib/all-projects/merge-project-boards";
 import useProjectStore from "@/store/project";
 import type { ProjectWithTasks } from "@/types/project";
 import BulkToolbar from "../bulk-selection/bulk-toolbar";
@@ -116,7 +117,8 @@ function ListView({
             to: "/dashboard/workspace/$workspaceId/project/$projectId/task/$taskId",
             params: {
               workspaceId: project.workspaceId,
-              projectId: project.id,
+              projectId:
+                findTaskProjectId(project, focusedTaskId) ?? project.id,
               taskId: focusedTaskId,
             },
           });

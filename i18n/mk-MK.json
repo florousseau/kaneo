@@ -1965,7 +1965,8 @@
 			"home": "Home",
 			"inbox": "Inbox",
 			"invitePeople": "Invite people",
-			"myTasks": "My tasks"
+			"myTasks": "My tasks",
+			"allProjects": "All projects"
 		},
 		"projectList": {
 			"viewProject": "Погледни проект",
@@ -2047,6 +2048,9 @@
 				"quickSelectNumber": "Избери опција по број",
 				"calendarView": "Префрли на календарски приказ"
 			}
+		},
+		"allProjects": {
+			"title": "All projects"
 		}
 	},
 	"notifications": {

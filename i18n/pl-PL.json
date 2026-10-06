@@ -455,7 +455,8 @@
 			"home": "Home",
 			"inbox": "Inbox",
 			"invitePeople": "Invite people",
-			"myTasks": "My tasks"
+			"myTasks": "My tasks",
+			"allProjects": "All projects"
 		},
 		"projectList": {
 			"viewProject": "Zobacz projekt",
@@ -537,6 +538,9 @@
 				"openTask": "Otwórz zaznaczone zadanie",
 				"quickSelectNumber": "Wybierz opcję numerem"
 			}
+		},
+		"allProjects": {
+			"title": "All projects"
 		}
 	},
 	"notifications": {

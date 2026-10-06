@@ -1957,7 +1957,8 @@
 			"home": "Home",
 			"inbox": "Inbox",
 			"invitePeople": "Invite people",
-			"myTasks": "My tasks"
+			"myTasks": "My tasks",
+			"allProjects": "All projects"
 		},
 		"projectList": {
 			"viewProject": "프로젝트 보기",
@@ -2039,6 +2040,9 @@
 				"openTask": "선택한 작업 열기",
 				"quickSelectNumber": "번호로 옵션 선택"
 			}
+		},
+		"allProjects": {
+			"title": "All projects"
 		}
 	},
 	"notifications": {

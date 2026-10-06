@@ -1965,7 +1965,11 @@
 			"home": "Home",
 			"inbox": "Inbox",
 			"myTasks": "My tasks",
+			"allProjects": "All projects",
 			"invitePeople": "Invite people"
+		},
+		"allProjects": {
+			"title": "All projects"
 		},
 		"projectList": {
 			"viewProject": "View Project",
